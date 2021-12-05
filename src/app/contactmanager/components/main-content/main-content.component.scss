@@ -1,0 +1,13 @@
+.user-details {
+  // max-width: 25rem;
+
+  &__header {
+    display: flex;
+  }
+
+  &__body {
+    p {
+      margin: 1rem 0;
+    }
+  }
+}

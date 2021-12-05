@@ -1,0 +1,33 @@
+<div class="user-details" *ngIf="user; else spinner">
+  <mat-card>
+    <div class="user-details__header">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="User Avatar"
+        [svgIcon]="user.avatar"
+      ></mat-icon>
+      <mat-card-header>
+        <mat-card-title>{{ user.name }}</mat-card-title>
+        <mat-card-subtitle
+          >Birthday: {{ user.birthDate | date: "d LLLL" }}</mat-card-subtitle
+        >
+      </mat-card-header>
+    </div>
+    <div class="user-details__body">
+      <mat-card-content>
+        <mat-tab-group>
+          <mat-tab label="Bio">
+            <p>{{ user.bio }}</p>
+          </mat-tab>
+          <mat-tab label="Notes" *ngIf="user.notes.length > 0">
+            <app-notes [notes]="user.notes"></app-notes>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>

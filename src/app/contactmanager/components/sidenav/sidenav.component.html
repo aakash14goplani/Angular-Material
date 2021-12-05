@@ -1,0 +1,42 @@
+<mat-sidenav-container class="app-sidenav-container" (backdropClick)="close()">
+  <mat-sidenav
+    #sidenav
+    (keydown.escape)="close()"
+    disableClose
+    class="app-sidenav-container__nav mat-elevation-z10"
+    [opened]="!isMobile"
+    [mode]="isMobile ? 'over' : 'side'"
+  >
+    <mat-toolbar color="primary">
+      <span>Contacts</span>
+    </mat-toolbar>
+
+    <mat-nav-list>
+      <mat-list-item *ngFor="let user of users | async">
+        <a
+          matLine
+          [routerLink]="['/contactmanager', user.id]"
+          routerLinkActive="active"
+          (click)="cloaseNavAfterClickForMobile()"
+        >
+          <mat-icon
+            aria-hidden="false"
+            aria-label="User Avatar"
+            [svgIcon]="user.avatar"
+          ></mat-icon>
+          <span>{{ user.name }}</span>
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="app-sidenav-container__content">
+    <app-toolbar
+      (toggleSideNav)="sidenav.toggle()"
+      [isMobile]="isMobile"
+    ></app-toolbar>
+    <div class="wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

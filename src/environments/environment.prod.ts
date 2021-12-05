@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  users: 'https://angular-material-api.azurewebsites.net/users'
 };
