@@ -29,6 +29,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
         const id = +param['id'] || 1;
         this.user = undefined;
         if (users.length === 0) return;
+        // this.user = this.userService.getUserById(id);
         setTimeout(() => {
           this.user = this.userService.getUserById(id);
         }, 500);

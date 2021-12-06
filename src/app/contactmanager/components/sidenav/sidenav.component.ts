@@ -1,3 +1,4 @@
+import { Direction } from '@angular/cdk/bidi';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -15,6 +16,8 @@ export class SidenavComponent implements OnInit, OnDestroy {
   @ViewChild('sidenav') sidenav!: MatSidenav;
   isMobile: boolean = false;
   users!: Observable<User[]>;
+  isDarkTheme: boolean = false;
+  direction: Direction = 'ltr';
   private readonly SMALL_WIDTH_BREAKPOINT: number = 720;
   private unsubscriber: Subject<void> = new Subject<void>();
 
@@ -44,6 +47,14 @@ export class SidenavComponent implements OnInit, OnDestroy {
     if (this.isMobile) {
       this.sidenav.close();
     }
+  }
+
+  toggleTheme(): void {
+    this.isDarkTheme = !this.isDarkTheme;
+  }
+
+  toggleDirection(): void {
+    this.direction = this.direction === 'ltr' ? 'rtl' : 'ltr';
   }
 
   /* @HostListener('window:resize', ['$event'])

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Add new contact</h2>
+<mat-dialog-content class="mat-typography">
+  <!-- avatar -->
+  <mat-form-field appearance="fill">
+    <mat-label>Avatar</mat-label>
+    <mat-select [(ngModel)]="user.avatar">
+      <mat-select-trigger>
+        <mat-icon [svgIcon]="user.avatar"></mat-icon> {{ user.avatar }}
+      </mat-select-trigger>
+      <mat-option *ngFor="let avatar of avatars" [value]="avatar">
+        <mat-icon [svgIcon]="avatar"></mat-icon> {{ avatar }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <!-- name -->
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="name" />
+    <mat-error *ngIf="name.invalid">{{ getErrorMessage() }}</mat-error>
+  </mat-form-field>
+  <!-- date -->
+  <mat-form-field appearance="fill">
+    <mat-label>Birth date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="user.birthDate" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <!-- bio -->
+  <mat-form-field appearance="fill">
+    <mat-label>Bio</mat-label>
+    <textarea matInput [(ngModel)]="user.bio"></textarea>
+  </mat-form-field>
+  <!-- generic error -->
+  <mat-error *ngIf="!isFormValid"
+    >*Please enter all mandatory details</mat-error
+  >
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="save()" cdkFocusInitial color="primary">
+    <mat-icon>save</mat-icon> Save
+  </button>
+  <button mat-button mat-dialog-close>
+    <mat-icon>cancel</mat-icon> Cancel
+  </button>
+</mat-dialog-actions>

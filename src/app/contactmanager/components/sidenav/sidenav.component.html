@@ -1,4 +1,9 @@
-<mat-sidenav-container class="app-sidenav-container" (backdropClick)="close()">
+<mat-sidenav-container
+  class="app-sidenav-container"
+  (backdropClick)="close()"
+  [class.dark-theme]="isDarkTheme"
+  [dir]="direction"
+>
   <mat-sidenav
     #sidenav
     (keydown.escape)="close()"
@@ -33,6 +38,8 @@
   <mat-sidenav-content class="app-sidenav-container__content">
     <app-toolbar
       (toggleSideNav)="sidenav.toggle()"
+      (toggleTheme)="toggleTheme()"
+      (toggleDirection)="toggleDirection()"
       [isMobile]="isMobile"
     ></app-toolbar>
     <div class="wrapper">
