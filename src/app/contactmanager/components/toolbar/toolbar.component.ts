@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarRef, SimpleSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { catchError, EMPTY, Subject, switchMap, takeUntil, tap } from 'rxjs';
+import { catchError, EMPTY, filter, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { NewContactDialogComponent } from '../new-contact-dialog/new-contact-dialog.component';
 
 @Component({
@@ -31,6 +31,7 @@ export class ToolbarComponent implements OnDestroy {
 
     let newUserId: number = 1;
     dialogRef.afterClosed().pipe(
+      filter(result => !!result.id),
       tap(result => newUserId = result.id),
       switchMap(_ => this.openSnackBar('Contact added', 'Navigate').onAction()),
       switchMap(_ => this.router.navigate(['/contactmanager', newUserId])),
