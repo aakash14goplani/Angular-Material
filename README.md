@@ -1,2 +1,3 @@
 # Angular-Material
-Angular Material (from Pluralsight by Ajden Towfeek)
+
+Learning Angular Material (from Pluralsight by Ajden Towfeek)
